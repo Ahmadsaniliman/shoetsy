@@ -7,7 +7,7 @@ class ProductDetailsScreen extends StatelessWidget {
   ProductDetailsScreen({super.key, required this.shoe});
 
   final List<Color> colors = [
-    Colors.green,
+    Colors.green, 
     Colors.blue,
     Colors.brown,
     Colors.cyan,
@@ -400,7 +400,7 @@ class ProductDetailsScreen extends StatelessWidget {
                                                       BorderRadius.circular(35),
                                                 ),
                                                 child: Image.asset(
-                                                    'assets/images/good.png'),
+                                                    'assets/images/Vector.png'),
                                               ),
                                               const Text(
                                                 'Added To Cart',
@@ -414,18 +414,23 @@ class ProductDetailsScreen extends StatelessWidget {
                                                     MainAxisAlignment
                                                         .spaceBetween,
                                                 children: [
-                                                  Container(
-                                                    height: 60,
-                                                    width: 140,
-                                                    decoration: BoxDecoration(
-                                                      border: Border.all(),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              20),
-                                                    ),
-                                                    child: const Center(
-                                                      child:
-                                                          Text('Back Expore'),
+                                                  GestureDetector(
+                                                       onTap : () {
+                                                             Navigator.of(context).pop();
+                                                       },
+                                                    child: Container(
+                                                      height: 60,
+                                                      width: 140,
+                                                      decoration: BoxDecoration(
+                                                        border: Border.all(),
+                                                        borderRadius:
+                                                            BorderRadius.circular(
+                                                                20),
+                                                      ),
+                                                      child: const Center(
+                                                        child:
+                                                            Text('Back Expore'),
+                                                      ),
                                                     ),
                                                   ),
                                                   GestureDetector(
@@ -433,6 +438,7 @@ class ProductDetailsScreen extends StatelessWidget {
                                                       Navigator.of(context)
                                                           .pushNamed(
                                                               'cartscreen');
+                                                            //   Navigator.of(context).pop();
                                                     },
                                                     child: Container(
                                                       height: 60,

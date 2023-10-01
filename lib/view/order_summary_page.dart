@@ -13,7 +13,9 @@ class OrderSummaryScreen extends StatelessWidget {
             Row(
               children: [
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).pushNamed('cartscreen');
+                  },
                   child: const Icon(Icons.arrow_back),
                 ),
                 const SizedBox(width: 100),
@@ -22,7 +24,7 @@ class OrderSummaryScreen extends StatelessWidget {
             ),
             SizedBox(
               width: double.infinity,
-              height: 650,
+              height: 555,
               child: SingleChildScrollView(
                 child: Column(
                   children: [
@@ -175,7 +177,42 @@ class OrderSummaryScreen extends StatelessWidget {
                   ],
                 ),
               ),
-            )
+            ),
+          ],
+        ),
+      ),
+      bottomNavigationBar: Container(
+        padding: const EdgeInsets.all(20),
+        height: 100,
+        width: double.infinity,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Column(
+              children: [
+                Text('Grand Total'),
+                Text(
+                  '\$705.25',
+                  style: TextStyle(
+                      color: Colors.black, fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+            Container(
+              height: 60,
+              width: 120,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: Colors.black,
+              ),
+              child: const Center(
+                child: Text(
+                  'Payment',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ),
           ],
         ),
       ),

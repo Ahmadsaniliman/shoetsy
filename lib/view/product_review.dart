@@ -33,7 +33,9 @@ class _ProductReviewScreenState extends State<ProductReviewScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).pushNamed('discoverscreen');
+                  },
                   icon: const Icon(Icons.arrow_back),
                 ),
                 const Text('Review(1045)'),

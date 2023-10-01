@@ -126,23 +126,28 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                 Positioned(
                   bottom: 0,
                   left: 100,
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                    height: 40,
-                    width: 119,
-                    decoration: BoxDecoration(
-                      color: Colors.black,
-                      borderRadius: BorderRadius.circular(20.0),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Image.asset('assets/images/setting-4.png'),
-                        const Text(
-                          'Filter',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ],
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).pushNamed('fliterscreen');
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                      height: 40,
+                      width: 119,
+                      decoration: BoxDecoration(
+                        color: Colors.black,
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Image.asset('assets/images/setting-4.png'),
+                          const Text(
+                            'Filter',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shoety/model/brand.dart';
 
 class ProductFilterScreen extends StatefulWidget {
   const ProductFilterScreen({super.key});
@@ -10,6 +11,13 @@ class ProductFilterScreen extends StatefulWidget {
 class _ProductFilterScreenState extends State<ProductFilterScreen> {
   @override
   Widget build(BuildContext context) {
+    final List<String> sortBy = [
+      'Most Recent',
+      'Lowest Price',
+      'Highest Price'
+    ];
+    final List<String> gender = ['Man', 'Woman', 'Unisex'];
+
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.only(top: 40.0, right: 20.0, left: 20.0),
@@ -18,7 +26,9 @@ class _ProductFilterScreenState extends State<ProductFilterScreen> {
             Row(
               children: [
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).pushNamed('discoverscreen');
+                  },
                   icon: const Icon(Icons.arrow_back),
                 ),
                 const SizedBox(width: 100.0),
@@ -26,24 +36,44 @@ class _ProductFilterScreenState extends State<ProductFilterScreen> {
               ],
             ),
             //
-            Container(
+            SizedBox(
               height: 143,
               width: double.infinity,
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Brands'),
-                  Column(
+                  const Text(
+                    'Brands',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Container(
-                        height: 50,
-                        width: 50,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15.0),
+                      ...List.generate(
+                        brands.length,
+                        (index) => Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Container(
+                              height: 60,
+                              width: 60,
+                              decoration: BoxDecoration(
+                                border: Border.all(),
+                                borderRadius: BorderRadius.circular(25),
+                              ),
+                              child: Expanded(
+                                  child: Image.asset(brands[index].image)),
+                            ),
+                            Text(
+                              brands[index].name,
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            Text(brands[index].items),
+                          ],
                         ),
-                        child: Image.asset(''),
                       ),
-                      const Text('Nike'),
-                      const Text('100 items'),
                     ],
                   ),
                 ],
@@ -51,28 +81,39 @@ class _ProductFilterScreenState extends State<ProductFilterScreen> {
             ),
             //
             //
+            const SizedBox(height: 15),
             Column(
               children: [
-                Container(
+                SizedBox(
                   height: 112,
                   width: double.infinity,
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text('Price Range'),
+                      const Text(
+                        'Price Range',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ),
                       Column(
                         children: [
                           Row(
                             children: [
                               Container(
+                                  height: 6, width: 75, color: Colors.grey),
+                              Container(
+                                padding: EdgeInsets.all(5),
                                 height: 30.0,
                                 width: 30.0,
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20.0),
-                                  color: Colors.black,
-                                ),
+                                    borderRadius: BorderRadius.circular(20.0),
+                                    color: Colors.black,
+                                    border: Border.all()),
                                 child: Container(
-                                  height: 18.0,
-                                  width: 18.0,
+                                  height: 15.0,
+                                  width: 15,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(20.0),
                                     color: Colors.white,
@@ -81,10 +122,11 @@ class _ProductFilterScreenState extends State<ProductFilterScreen> {
                               ),
                               Container(
                                 height: 5,
-                                width: 250,
+                                width: 100,
                                 color: Colors.black,
                               ),
                               Container(
+                                padding: EdgeInsets.all(5),
                                 height: 30.0,
                                 width: 30.0,
                                 decoration: BoxDecoration(
@@ -92,21 +134,28 @@ class _ProductFilterScreenState extends State<ProductFilterScreen> {
                                   color: Colors.black,
                                 ),
                                 child: Container(
-                                  height: 18.0,
-                                  width: 18.0,
+                                  height: 15.0,
+                                  width: 15.0,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(20.0),
                                     color: Colors.white,
                                   ),
                                 ),
                               ),
+                              Container(
+                                  height: 6, width: 75, color: Colors.grey),
                             ],
                           ),
                           //
+                          const SizedBox(height: 10),
                           const Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text('\$200'),
+                              Text('\$400',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              Text('\$650',style:TextStyle(fontWeight:FontWeight.bold),),
                               Text('\$750'),
                             ],
                           ),
@@ -115,25 +164,35 @@ class _ProductFilterScreenState extends State<ProductFilterScreen> {
                     ],
                   ),
                 ),
-                //
-                //
-                //
-                Container(
+
+                SizedBox(
                   height: 86,
                   width: double.infinity,
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text('Sort By'),
+                      const Text(
+                        'Sort By',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           ...List.generate(
                             3,
                             (index) => Container(
-                              height: 40,
+                              padding: const EdgeInsets.all(15),
+                              height: 50,
+                              width: 100,
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20.0),
+                                  borderRadius: BorderRadius.circular(20.0),
+                                  border: Border.all()),
+                              child: Center(
+                                child: Text(sortBy[index]),
                               ),
-                              child: const Text('Most recent'),
                             ),
                           ),
                         ],
@@ -141,22 +200,31 @@ class _ProductFilterScreenState extends State<ProductFilterScreen> {
                     ],
                   ),
                 ),
-                Container(
+                const SizedBox(height: 5),
+                SizedBox(
                   height: 86,
                   width: double.infinity,
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text('Gender'),
+                      const Text(
+                        'Gender',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 20),
+                      ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           ...List.generate(
                             3,
                             (index) => Container(
-                              height: 40,
+                              height: 50,
+                              width: 90,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20.0),
+                                border: Border.all(),
                               ),
-                              child: const Text('Man'),
+                              child: Center(child: Text(gender[index])),
                             ),
                           ),
                         ],
@@ -164,33 +232,88 @@ class _ProductFilterScreenState extends State<ProductFilterScreen> {
                     ],
                   ),
                 ),
-                Container(
+                const SizedBox(height: 5),
+                SizedBox(
                   height: 86,
                   width: double.infinity,
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text('Color'),
+                      const Text(
+                        'Color',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 20),
+                      ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          ...List.generate(
-                            3,
-                            (index) => Container(
-                              height: 40,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20.0),
-                              ),
-                              child: Row(
-                                children: [
-                                  Container(
-                                    height: 25,
-                                    width: 25,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20.0),
-                                    ),
+                          Container(
+                            padding: EdgeInsets.symmetric(horizontal: 10),
+                            height: 50,
+                            width: 100,
+                            decoration: BoxDecoration(
+                              border: Border.all(),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(
+                                  height: 30,
+                                  width: 30,
+                                  decoration: BoxDecoration(
+                                    color: Colors.black,
+                                    borderRadius: BorderRadius.circular(25),
                                   ),
-                                  const Text('Black'),
-                                ],
-                              ),
+                                ),
+                                const Text('Black'),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.symmetric(horizontal: 10),
+                            height: 50,
+                            width: 100,
+                            decoration: BoxDecoration(
+                              border: Border.all(),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(
+                                  height: 30,
+                                  width: 30,
+                                  decoration: BoxDecoration(
+                                    color: Colors.red,
+                                    borderRadius: BorderRadius.circular(25),
+                                  ),
+                                ),
+                                const Text('Red'),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.symmetric(horizontal: 10),
+                            height: 50,
+                            width: 100,
+                            decoration: BoxDecoration(
+                              border: Border.all(),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(
+                                  height: 30,
+                                  width: 30,
+                                  decoration: BoxDecoration(
+                                    color: Colors.green,
+                                    borderRadius: BorderRadius.circular(25),
+                                  ),
+                                ),
+                                const Text('Green'),
+                              ],
                             ),
                           ),
                         ],
@@ -202,29 +325,33 @@ class _ProductFilterScreenState extends State<ProductFilterScreen> {
                 //
                 //
                 //
+                const SizedBox(height: 20),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
                       height: 60.0,
-                      width: 250.0,
+                      width: 150.0,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20.0),
                         border: Border.all(),
                       ),
-                      child: const Text('Reset (4)'),
+                      child: const Center(child: Text('Reset (4)')),
                     ),
                     Container(
                       height: 60.0,
-                      width: 250.0,
+                      width: 150.0,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20.0),
                         border: Border.all(),
                         color: Colors.black,
                       ),
-                      child: const Text(
-                        'Apply',
-                        style: TextStyle(
-                          color: Colors.white,
+                      child: const Center(
+                        child: Text(
+                          'Apply',
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),
